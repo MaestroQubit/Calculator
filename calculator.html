@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculator UI — White & Tan</title>
+  <style>
+    :root {
+      --bg: #faf7f2;            /* off-white with a hint of tan */
+      --surface: #ffffff;        /* pure white card */
+      --tan-50: #f4ece2;         /* very light tan */
+      --tan-100: #ecdcc8;
+      --tan-200: #e2ccae;
+      --tan-300: #d2b48c;        /* classic tan */
+      --tan-400: #c49a6c;        /* deeper tan */
+      --tan-500: #a4784a;        /* accent/darker */
+      --text: #2c2a28;           /* near-black/brown */
+      --muted: #7a6e61;          /* muted text */
+      --ring: 0 0 0 3px rgba(210, 180, 140, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% 10%, var(--tan-50), transparent 60%),
+        radial-gradient(800px 600px at 90% 20%, var(--tan-100), transparent 50%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .calculator {
+      width: 360px;
+      max-width: 92vw;
+      background: var(--surface);
+      border: 1px solid var(--tan-200);
+      border-radius: 16px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.05),
+        0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, var(--tan-50), transparent);
+      border-bottom: 1px solid var(--tan-200);
+    }
+
+    .title {
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .badge {
+      font-size: 12px;
+      color: var(--muted);
+      background: #fff;
+      border: 1px solid var(--tan-200);
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .display {
+      padding: 18px 16px;
+      background: linear-gradient(180deg, var(--surface), var(--tan-50));
+      border-bottom: 1px solid var(--tan-200);
+      min-height: 84px;
+      display: grid;
+      align-items: end;
+      justify-items: end;
+    }
+
+    .display .value {
+      font-variant-numeric: tabular-nums;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px;
+      background: linear-gradient(180deg, #fff, var(--tan-50));
+    }
+
+    .key {
+      appearance: none;
+      border: 1px solid var(--tan-200);
+      background: linear-gradient(180deg, #fff, var(--tan-50));
+      color: var(--text);
+      border-radius: 12px;
+      padding: 14px 12px;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 1px 0 #fff inset, 0 1.5px 0 rgba(0,0,0,0.04);
+      transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+    }
+
+    .key:hover { box-shadow: 0 1px 0 #fff inset, 0 2px 12px rgba(0,0,0,0.06); }
+    .key:active { transform: translateY(1px); }
+    .key:focus-visible { outline: none; box-shadow: var(--ring); }
+
+    .key.operator {
+      background: linear-gradient(180deg, var(--tan-300), var(--tan-400));
+      border-color: var(--tan-400);
+      color: #fff;
+    }
+
+    .key.operator:hover { filter: brightness(1.02); }
+
+    .key.equals {
+      background: linear-gradient(180deg, var(--tan-400), var(--tan-500));
+      border-color: var(--tan-500);
+      color: #fff;
+    }
+
+    .key.ac { color: var(--tan-500); border-color: var(--tan-300); background: #fff; }
+
+    .key.zero { grid-column: span 2; }
+
+    .footer {
+      padding: 10px 14px 16px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      border-top: 1px dashed var(--tan-200);
+      background: linear-gradient(180deg, var(--tan-50), transparent);
+    }
+  </style>
+</head>
+<body>
+  <section class="calculator" aria-label="Calculator UI (HTML/CSS only)">
+    <div class="header">
+      <div class="title">Calculator</div>
+      <div class="badge">White · Tan</div>
+    </div>
+
+    <div class="display" role="status" aria-live="polite">
+      <div class="value">0</div>
+    </div>
+
+    <div class="keys" aria-hidden="true">
+      <!-- Row 1 -->
+      <button class="key ac" type="button">AC</button>
+      <button class="key" type="button">±</button>
+      <button class="key" type="button">%</button>
+      <button class="key operator" type="button">÷</button>
+
+      <!-- Row 2 -->
+      <button class="key" type="button">7</button>
+      <button class="key" type="button">8</button>
+      <button class="key" type="button">9</button>
+      <button class="key operator" type="button">×</button>
+
+      <!-- Row 3 -->
+      <button class="key" type="button">4</button>
+      <button class="key" type="button">5</button>
+      <button class="key" type="button">6</button>
+      <button class="key operator" type="button">−</button>
+
+      <!-- Row 4 -->
+      <button class="key" type="button">1</button>
+      <button class="key" type="button">2</button>
+      <button class="key" type="button">3</button>
+      <button class="key operator" type="button">+</button>
+
+      <!-- Row 5 -->
+      <button class="key zero" type="button">0</button>
+      <button class="key" type="button">.</button>
+      <button class="key equals" type="button">=</button>
+    </div>
+
+    <div class="footer">UI shell only — add JavaScript to make it work.</div>
+  </section>
+</body>
+</html>
