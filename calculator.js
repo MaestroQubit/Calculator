@@ -4,9 +4,10 @@ const keys = document.querySelector('.keys');
 let current = '0';
 let previous = null;
 let operator = null;
+let waitingForNext = false;
 
 function updateDisplay() {
-    display.textContent = current;
+    display.textContent = current || '0';
 }
 
 keys.addEventListener('click', e => {
@@ -15,20 +16,45 @@ keys.addEventListener('click', e => {
     const key = e.target.textContent;
 
     if (!isNaN(key)) {
-        current = current === '0' ? key : current + key;
+        // Number pressed
+        if (waitingForNext) {
+            current = key;
+            waitingForNext = false;
+        } else {
+            current = current === '0' ? key : current + key;
+        }
     } else if (key === 'AC') {
+        // Reset everything
         current = '0';
         previous = null;
         operator = null;
+        waitingForNext = false;
     } else if (['+', '−', '×', '÷'].includes(key)) {
-        operator = key;
+        // Normalize operator symbols
+        const normalized = (key === '−') ? '-' :
+            (key === '×') ? '*' :
+                (key === '÷') ? '/' : '+';
+
+        if (operator && !waitingForNext) {
+            // Perform chained calculation before setting new operator
+            const parts = current.trim().split(/[\+\−×÷]/);
+            const lastNum = parts[parts.length - 1];
+            current = calculate(previous, lastNum, operator).toString();
+        }
+
+        operator = normalized;
         previous = current;
-        current = '0';
+        current += ' ' + key + ' '; // show operator in display
+        waitingForNext = true;
     } else if (key === '=') {
         if (operator && previous !== null) {
-            current = calculate(previous, current, operator).toString();
+            // Extract last number after operator symbol
+            const parts = current.trim().split(/[\+\−×÷]/);
+            const lastNum = parts[parts.length - 1];
+            current = calculate(previous, lastNum, operator).toString();
             operator = null;
             previous = null;
+            waitingForNext = false;
         }
     } else if (key === '.') {
         if (!current.includes('.')) current += '.';
@@ -46,11 +72,12 @@ function calculate(a, b, operator) {
     b = parseFloat(b);
     switch (operator) {
         case '+': return a + b;
-        case '−': return a - b;
-        case '×': return a * b;
-        case '÷': return b !== 0 ? a / b : 'Error';
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return b !== 0 ? a / b : 'Error';
         default: return b;
     }
 }
 
+// Initialize display
 updateDisplay();
