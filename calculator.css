@@ -1,22 +1,14 @@
 :root {
     --bg: #faf7f2;
-    /* off-white with a hint of tan */
     --surface: #ffffff;
-    /* pure white card */
     --tan-50: #f4ece2;
-    /* very light tan */
     --tan-100: #ecdcc8;
     --tan-200: #e2ccae;
     --tan-300: #d2b48c;
-    /* classic tan */
     --tan-400: #c49a6c;
-    /* deeper tan */
     --tan-500: #a4784a;
-    /* accent/darker */
     --text: #2c2a28;
-    /* near-black/brown */
     --muted: #7a6e61;
-    /* muted text */
     --ring: 0 0 0 3px rgba(210, 180, 140, 0.35);
 }
 

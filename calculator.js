@@ -15,7 +15,6 @@ keys.addEventListener('click', e => {
     const key = e.target.textContent;
 
     if (!isNaN(key)) {
-        // Number pressed
         current = current === '0' ? key : current + key;
     } else if (key === 'AC') {
         current = '0';
