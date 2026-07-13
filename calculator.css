@@ -54,7 +54,7 @@ body {
     overflow: hidden;
 }
 
-.header {
+header.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,18 +63,9 @@ body {
     border-bottom: 1px solid var(--tan-200);
 }
 
-.title {
+h1 {
     font-weight: 600;
     letter-spacing: 0.2px;
-}
-
-.badge {
-    font-size: 12px;
-    color: var(--muted);
-    background: #fff;
-    border: 1px solid var(--tan-200);
-    border-radius: 999px;
-    padding: 4px 8px;
 }
 
 .display {
@@ -87,7 +78,7 @@ body {
     justify-items: end;
 }
 
-.display .value {
+.display.value {
     font-variant-numeric: tabular-nums;
     font-size: 40px;
     line-height: 1;
@@ -135,6 +126,7 @@ body {
     background: linear-gradient(180deg, var(--tan-300), var(--tan-400));
     border-color: var(--tan-400);
     color: #fff;
+    transition: filter 120ms ease;
 }
 
 .key.operator:hover {
@@ -157,7 +149,7 @@ body {
     grid-column: span 2;
 }
 
-.footer {
+footer.footer {
     padding: 10px 14px 16px;
     color: var(--muted);
     font-size: 12px;

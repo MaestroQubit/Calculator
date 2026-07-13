@@ -6,20 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Calculator</title>
   <link rel="stylesheet" href="calculator.css">
+  <script src="calculator.js"></script>
 </head>
 
 <body>
-  <section class="calculator" aria-label="Calculator UI (HTML/CSS only)">
-    <div class="header">
-      <div class="title">Calculator</div>
-      <div class="badge">White · Tan</div>
-    </div>
+  <section class="calculator">
+    <header class="header">
+      <h1>Calculator</h1>
+    </header>
 
-    <div class="display" role="status" aria-live="polite">
-      <div class="value">0</div>
-    </div>
 
-    <div class="keys" aria-hidden="true">
+    <div class="display value" aria-live="polite">0</div>
+
+    <div class="keys">
       <!-- Row 1 -->
       <button class="key ac" type="button">AC</button>
       <button class="key" type="button">±</button>
@@ -50,7 +49,7 @@
       <button class="key equals" type="button">=</button>
     </div>
 
-    <div class="footer">UI shell only — add JavaScript to make it work.</div>
+    <footer class="footer">Maths made Easy</footer>
   </section>
 </body>
 
